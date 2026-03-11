@@ -3,397 +3,260 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Supermercado Frontera · Alimentos Frescos</title>
-  <!-- Bootstrap 5 (boomstrap) -->
+  <title>Supermercado · Alimentos frescos</title>
+  <!-- Bootstrap 5 (boomstrap 5) justo para maquetación limpia, respetando el diseño exacto de la imagen -->
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
-  <!-- Bootstrap Icons para detalles -->
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
-  <!-- Google Fonts: Montserrat + Playfair Display (toque rústico-fresco) -->
-  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;800&family=Playfair+Display:ital,wght@0,500;0,700;1,400&display=swap" rel="stylesheet">
   <style>
+    /* RESET absolutamente fiel a la imagen: tipografía por defecto del sistema (sin google fonts) tal como se ve en la foto */
     * {
       margin: 0;
       padding: 0;
       box-sizing: border-box;
     }
     body {
-      background: linear-gradient(145deg, #f3f1eb 0%, #e8e3d8 100%);
-      font-family: 'Montserrat', sans-serif;
+      background-color: #e6e2da;  /* fondo cálido gris-beige, igual al de la imagen */
       display: flex;
       align-items: center;
       justify-content: center;
       min-height: 100vh;
-      padding: 2rem 1rem;
+      padding: 20px;
+      font-family: system-ui, -apple-system, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
     }
-    /* Tarjeta principal con sombra y textura sutil */
-    .card-frontera {
-      max-width: 1100px;
+
+    /* contenedor principal: dimensiones y forma idénticas al recorte */
+    .papel-frontera {
+      max-width: 780px;
       width: 100%;
-      background-color: #ffffff;
-      border-radius: 48px 48px 40px 40px;
-      box-shadow: 0 30px 50px -15px rgba(0, 0, 0, 0.25), 0 0 0 1px rgba(255, 215, 180, 0.3) inset;
+      background-color: white;
+      border-radius: 45px 45px 40px 40px;  /* justo el radio de la imagen */
       overflow: hidden;
-      backdrop-filter: blur(2px);
-      transition: all 0.2s ease;
+      box-shadow: 0 20px 30px -8px rgba(0, 0, 0, 0.2);
+      border: 1px solid #d6c9bc;
     }
-    /* HEADER con imagen de fondo y superposición */
-    .hero-fresco {
-      background-image: linear-gradient(97deg, rgba(0, 0, 0, 0.2) 0%, rgba(0, 0, 0, 0.1) 60%), url('https://images.pexels.com/photos/2641886/pexels-photo-2641886.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2');
-      background-size: cover;
-      background-position: center 30%;
-      padding: 3rem 3rem 2.5rem 3rem;
-      position: relative;
-      border-bottom: 6px solid #e67946;
+
+    /* CABECERA: fondo melocotón exacto como en la imagen (#f8d9cf) */
+    .cabecera-alimentos {
+      background-color: #f8d9cf;   /* color idéntico al fondo de SUPERMERCADO */
+      padding: 2.3rem 2.2rem 2rem 2.2rem;
+      border-bottom: 3px solid #e0b9a8;
     }
-    /* capa tenue para legibilidad */
-    .hero-fresco::before {
-      content: "";
-      position: absolute;
-      top: 0; left: 0; width: 100%; height: 100%;
-      background: rgba(255, 245, 235, 0.2);
-      backdrop-filter: blur(1.5px);
-      pointer-events: none;
-    }
-    .hero-content {
-      position: relative;
-      z-index: 3;
-    }
-    .display-super {
-      font-size: 5.2rem;
+
+    /* SUPERMERCADO en mayúsculas, grueso, con espaciado preciso */
+    .super-titulo {
+      font-size: 4.5rem;
       font-weight: 800;
       line-height: 1;
-      color: #ffffff;
-      text-shadow: 4px 4px 12px rgba(0, 0, 0, 0.5), 2px 2px 0 #d94f2b;
-      letter-spacing: -0.02em;
-      margin-bottom: 0.5rem;
+      letter-spacing: -0.5px;
+      color: #1c1c1c;
       text-transform: uppercase;
-      background: linear-gradient(135deg, #fff9f0, #ffeede);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      text-shadow: 2px 2px 8px rgba(0,0,0,0.3);
+      margin-bottom: 0.2rem;
+      font-family: system-ui, 'Segoe UI', Roboto, sans-serif;
     }
-    .super-underline {
-      width: 140px;
-      height: 8px;
-      background: #ffb08c;
-      border-radius: 40px;
-      margin: 15px 0 20px 0;
-      box-shadow: 0 2px 6px #d94f2b80;
+
+    /* línea decorativa naranja (más corta, como en la imagen) */
+    .raya-naranja {
+      width: 90px;
+      height: 7px;
+      background-color: #d34f27;    /* naranja quemado exacto */
+      border-radius: 8px;
+      margin: 12px 0 18px 0;
     }
-    .bullet-line {
+
+    /* estilo de los ítems con bullet (punto) - replicando viñeta cuadrada? No, en imagen es un círculo perfecto */
+    .item-bullet {
       display: flex;
       align-items: center;
-      gap: 15px;
-      margin: 12px 0;
-      background: rgba(255, 255, 255, 0.7);
-      backdrop-filter: blur(8px);
-      padding: 0.6rem 1.5rem 0.6rem 1rem;
-      border-radius: 60px;
-      width: fit-content;
-      border: 1px solid rgba(255, 140, 80, 0.3);
+      gap: 16px;
+      margin-bottom: 10px;
     }
     .bullet {
       width: 18px;
       height: 18px;
-      background: #e65322;
+      background-color: #d34f27;    /* mismo naranja */
       border-radius: 50%;
-      box-shadow: 0 0 0 3px #ffe4d6;
+      flex-shrink: 0;
+      /* en la imagen se ve ligeramente más pequeño, pero es proporcional */
     }
-    .alimento-text {
-      font-size: 2.3rem;
+    .texto-bullet {
+      font-size: 2.2rem;
       font-weight: 600;
-      color: #1f2a1e;
-      line-height: 1.2;
+      color: #1e1e1e;
+      line-height: 1.1;
       text-transform: lowercase;
-      font-family: 'Playfair Display', serif;
-      letter-spacing: -0.01em;
+      font-family: system-ui, 'Segoe UI', Roboto, sans-serif;
+      letter-spacing: -0.3px;
     }
-    .alimento-text::first-letter {
+    .texto-bullet::first-letter {
       text-transform: uppercase;
-      font-size: 2.6rem;
       font-weight: 700;
-      color: #b34513;
     }
 
-    /* SECCIÓN CARTELERA CON FOTOS REALES */
-    .cartelera-premium {
-      background-color: #fcf8f2;
-      padding: 2.5rem 3rem 3rem 3rem;
-      border-top: 4px solid #f0cdb0;
+    /* SEGUNDA SECCIÓN (fondo gris claro como en la foto) */
+    .seccion-carteles {
+      background-color: #f1efeb;   /* gris-beige clarísimo, idéntico al de la imagen */
+      padding: 2.2rem 2.2rem 2.8rem 2.2rem;
+      border-top: 2px solid #dacfc4;
     }
-    .cartel-title {
-      font-size: 2.2rem;
-      font-weight: 700;
-      color: #3e2f21;
-      text-transform: uppercase;
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      border-bottom: 3px dotted #d9b596;
-      padding-bottom: 0.75rem;
+
+    /* "Carteles de la página web" en minúsculas? No, en imagen es oración con mayúsculas solo iniciales */
+    .carteles-titulo {
+      font-size: 1.9rem;
+      font-weight: 650;
+      color: #26211c;
+      line-height: 1.2;
       margin-bottom: 0.5rem;
+      letter-spacing: -0.2px;
     }
-    .cartel-sub {
-      font-size: 1.5rem;
-      font-weight: 500;
-      color: #6e4f36;
-      margin-bottom: 2rem;
-      background: #f3e9de;
+
+    /* "CARTELERÍA DE LA PÁGINA WEB FRONTERA" tal cual, todo en mayúsculas y con su tipografía */
+    .carteles-subtitulo {
+      font-size: 1.45rem;
+      font-weight: 600;
+      color: #3b2f26;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      word-spacing: 2px;
+      margin-bottom: 1.8rem;
+      border-left: 7px solid #d34f27;   /* barra naranja izquierda como en el diseño */
+      padding-left: 1.1rem;
+      background-color: #f1efeb;        /* mismo fondo para que parezca una línea naranja pegada */
       display: inline-block;
-      padding: 0.5rem 2rem 0.5rem 1.5rem;
+    }
+
+    /* Contenedor de los cartelitos (rectángulos grises con texto) */
+    .cartel-grid {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px 14px;
+      margin-top: 0.5rem;
+      margin-bottom: 2.2rem;
+    }
+
+    /* cada cartel es un rectángulo redondeado, gris claro, con texto en negrita */
+    .cartel-item {
+      background-color: #eae5de;      /* gris con tono crema, igual a los carteles de la imagen */
+      border-radius: 40px;             /* muy redondeado pero no exagerado */
+      padding: 0.6rem 2rem 0.6rem 2rem;
+      display: inline-block;
+      font-size: 1.35rem;
+      font-weight: 650;
+      color: #252016;
+      border: 1px solid #cbbcac;
+      letter-spacing: -0.2px;
+      box-shadow: 0 2px 3px rgba(0,0,0,0.02);
+      text-transform: uppercase;        /* tal cual en la imagen: OFERTA LIMÓN, VERDURAS, etc van en mayúsculas */
+    }
+
+    /* fila adicional de carteles (segunda tanda) exacta a la imagen: SUPER OFERTA, 2X1 CÍTRICOS, HUEVOS CAMPESTRES */
+    .carteles-secundarios {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 14px 18px;
+      margin: 0.5rem 0 1.8rem 0;
+    }
+    .cartel-sec {
+      background-color: #eae5de;
       border-radius: 40px;
-      border-left: 8px solid #d94f2b;
-      font-style: italic;
+      padding: 0.7rem 2.2rem 0.7rem 2.2rem;
+      font-size: 1.4rem;
+      font-weight: 650;
+      color: #23201a;
+      border: 1px solid #cbbcac;
+      text-transform: uppercase;
     }
-    /* grid de tarjetas con imágenes */
-    .foto-carteles-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-      gap: 1.5rem;
-      margin: 2.5rem 0 1.8rem;
-    }
-    .cartel-foto-card {
-      background: white;
-      border-radius: 28px;
-      overflow: hidden;
-      box-shadow: 0 12px 20px -12px rgba(0,0,0,0.2);
-      border: 1px solid #ffe1cc;
-      transition: transform 0.2s, box-shadow 0.2s;
-    }
-    .cartel-foto-card:hover {
-      transform: translateY(-6px);
-      box-shadow: 0 24px 30px -12px #b35e2e80;
-    }
-    .img-cartel {
-      width: 100%;
-      height: 150px;
-      object-fit: cover;
-      border-bottom: 3px solid #ffb185;
-    }
-    .cartel-body {
-      padding: 0.9rem 1rem 1rem 1rem;
-      background: #ffffff;
-    }
-    .cartel-nombre {
-      font-weight: 700;
-      font-size: 1.2rem;
-      color: #421f0a;
+
+    /* texto de nota al pie: "más carteles en la web · actualizado 2026" con su puntito */
+    .nota-pie {
+      font-size: 1.1rem;
+      color: #6b5d50;
+      margin-top: 2rem;
       display: flex;
       align-items: center;
       gap: 6px;
+      background-color: transparent;
+      font-weight: 400;
     }
-    .cartel-nombre i {
-      color: #d94f2b;
-      font-size: 1.2rem;
-    }
-    .cartel-precio {
-      font-size: 1.5rem;
-      font-weight: 800;
-      color: #2b6e3c;
-      background: #e3f5e5;
-      display: inline-block;
-      padding: 0.15rem 1rem;
-      border-radius: 40px;
-      margin-top: 8px;
-      border: 1px solid #b0dbb0;
-    }
-
-    /* Franja doble de ofertas destacadas (con foto de fondo) */
-    .ofertas-destacadas {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 1.5rem;
-      margin: 2rem 0 1.5rem;
-    }
-    .oferta-block {
-      flex: 1 1 200px;
-      background: linear-gradient(112deg, #fff7ec, #ffeada);
-      border-radius: 40px;
-      padding: 0.2rem 1.5rem 0.2rem 0.8rem;
-      display: flex;
-      align-items: center;
-      gap: 0.7rem;
-      border: 1px solid #ffdac5;
-      box-shadow: 0 10px 12px -10px #cf7e4a;
-    }
-    .oferta-block img {
-      width: 60px;
-      height: 60px;
-      border-radius: 60px;
-      object-fit: cover;
-      border: 3px solid white;
-      box-shadow: 0 4px 8px #c75f2a60;
-    }
-    .oferta-texto {
-      font-weight: 700;
-      font-size: 1.2rem;
-      color: #4f2f17;
-    }
-    .badge-oferta {
-      background: #d94f2b;
-      color: white;
-      border-radius: 50px;
-      padding: 0.2rem 1rem;
-      font-size: 0.9rem;
-      font-weight: 600;
-      margin-left: 8px;
-    }
-
-    /* línea final con detalle actualizado */
-    .small-note-premium {
-      margin-top: 2.2rem;
-      font-size: 1.1rem;
-      color: #5d4a38;
-      background: #fff6e6;
-      padding: 0.8rem 1.5rem;
-      border-radius: 60px;
-      display: inline-flex;
-      align-items: center;
-      gap: 10px;
-      border: 2px dashed #cc9f7c;
-    }
-    .small-note-premium i {
-      color: #c7622e;
+    .nota-pie i {
+      color: #d34f27;
       font-size: 1.8rem;
+      font-style: normal;
+      line-height: 0;
+    }
+    .punto-naranja {
+      display: inline-block;
+      width: 10px;
+      height: 10px;
+      background-color: #d34f27;
+      border-radius: 50%;
+      margin-right: 8px;
     }
 
-    /* responsividad */
-    @media (max-width: 700px) {
-      .display-super { font-size: 3.8rem; }
-      .hero-fresco { padding: 2rem; }
-      .cartelera-premium { padding: 2rem; }
+    /* RESPONSIVE: que no se rompa en móvil */
+    @media (max-width: 600px) {
+      .super-titulo { font-size: 3.2rem; }
+      .texto-bullet { font-size: 1.8rem; }
+      .carteles-titulo { font-size: 1.6rem; }
+      .carteles-subtitulo { font-size: 1.2rem; }
+      .cartel-item { font-size: 1.1rem; padding: 0.5rem 1.5rem; }
     }
   </style>
 </head>
 <body>
-  <div class="card-frontera">
+  <div class="papel-frontera">
 
-    <!-- HERO: SUPERMERCADO con imagen real de fondo (frescos) -->
-    <div class="hero-fresco">
-      <div class="hero-content">
-        <div class="display-super">SUPERMERCADO</div>
-        <div class="super-underline"></div>
+    <!-- CABECERA: SUPERMERCADO + para alimentos / frescos -->
+    <div class="cabecera-alimentos">
+      <div class="super-titulo">SUPERMERCADO</div>
+      <!-- raya naranja exacta -->
+      <div class="raya-naranja"></div>
 
-        <!-- para alimentos con bullet y foto en miniatura incrustada (toque real) -->
-        <div class="bullet-line">
-          <span class="bullet"></span>
-          <span class="alimento-text">para alimentos</span>
-          <img src="https://images.pexels.com/photos/1279330/pexels-photo-1279330.jpeg?auto=compress&cs=tinysrgb&w=40&h=40&dpr=2" 
-               alt="alimentos" style="width: 38px; height: 38px; border-radius: 40px; object-fit: cover; border: 2px solid white; margin-left: 5px;">
-        </div>
+      <!-- ítem: para alimentos -->
+      <div class="item-bullet">
+        <span class="bullet"></span>
+        <span class="texto-bullet">para alimentos</span>
+      </div>
 
-        <!-- frescos con bullet + mini imagen real -->
-        <div class="bullet-line">
-          <span class="bullet"></span>
-          <span class="alimento-text">frescos</span>
-          <img src="https://images.pexels.com/photos/4057699/pexels-photo-4057699.jpeg?auto=compress&cs=tinysrgb&w=40&h=40&dpr=2" 
-               alt="frescos" style="width: 38px; height: 38px; border-radius: 40px; object-fit: cover; border: 2px solid white; margin-left: 5px;">
-        </div>
+      <!-- ítem: frescos (mismo estilo) -->
+      <div class="item-bullet">
+        <span class="bullet"></span>
+        <span class="texto-bullet">frescos</span>
       </div>
     </div>
 
-    <!-- CARTELERÍA DE LA PÁGINA WEB FRONTERA (con fotos reales de productos) -->
-    <div class="cartelera-premium">
-      <div class="cartel-title">
-        <i class="bi bi-megaphone-fill" style="color: #d94f2b;"></i> Carteles de la página web
-      </div>
-      <div class="cartel-sub">
-        <i class="bi bi-grid-3x3-gap-fill me-2"></i> CARTELERÍA DE LA PÁGINA WEB FRONTERA
+    <!-- SECCIÓN INFERIOR: carteles -->
+    <div class="seccion-carteles">
+      <!-- primera línea: Carteles de la página web -->
+      <div class="carteles-titulo">Carteles de la página web</div>
+      <!-- segunda línea: CARTELERÍA DE LA PÁGINA WEB FRONTERA (con barra naranja) -->
+      <div class="carteles-subtitulo">CARTELERÍA DE LA PÁGINA WEB FRONTERA</div>
+
+      <!-- GRUPO 1 DE CARTELES (tal como aparece en la imagen: oferta limón, verduras, fruta del día, hortalizas, pan recién horneado, carnes, pescados, lácteos) -->
+      <div class="cartel-grid">
+        <span class="cartel-item">OFERTA LIMÓN</span>
+        <span class="cartel-item">VERDURAS</span>
+        <span class="cartel-item">FRUTA DEL DÍA</span>
+        <span class="cartel-item">HORTALIZAS</span>
+        <span class="cartel-item">PAN RECIÉN HORNEADO</span>
+        <span class="cartel-item">CARNES</span>
+        <span class="cartel-item">PESCADOS</span>
+        <span class="cartel-item">LÁCTEOS</span>
       </div>
 
-      <!-- Grid con fotos reales de alimentos y sus carteles -->
-      <div class="foto-carteles-grid">
-        <!-- tarjeta 1 -->
-        <div class="cartel-foto-card">
-          <img class="img-cartel" src="https://images.pexels.com/photos/2294476/pexels-photo-2294476.jpeg?auto=compress&cs=tinysrgb&w=300&h=200&dpr=2" alt="limones">
-          <div class="cartel-body">
-            <div class="cartel-nombre"><i class="bi bi-tag"></i> OFERTA LIMÓN</div>
-            <span class="cartel-precio">0,89 €</span>
-          </div>
-        </div>
-        <!-- tarjeta 2 -->
-        <div class="cartel-foto-card">
-          <img class="img-cartel" src="https://images.pexels.com/photos/2329440/pexels-photo-2329440.jpeg?auto=compress&cs=tinysrgb&w=300&h=200&dpr=2" alt="verduras">
-          <div class="cartel-body">
-            <div class="cartel-nombre"><i class="bi bi-tag"></i> VERDURAS</div>
-            <span class="cartel-precio">1,25 €/kg</span>
-          </div>
-        </div>
-        <!-- tarjeta 3 -->
-        <div class="cartel-foto-card">
-          <img class="img-cartel" src="https://images.pexels.com/photos/61127/pexels-photo-61127.jpeg?auto=compress&cs=tinysrgb&w=300&h=200&dpr=2" alt="fresas">
-          <div class="cartel-body">
-            <div class="cartel-nombre"><i class="bi bi-tag"></i> FRUTA DEL DÍA</div>
-            <span class="cartel-precio">fresas 2,50€</span>
-          </div>
-        </div>
-        <!-- tarjeta 4 -->
-        <div class="cartel-foto-card">
-          <img class="img-cartel" src="https://images.pexels.com/photos/2574616/pexels-photo-2574616.jpeg?auto=compress&cs=tinysrgb&w=300&h=200&dpr=2" alt="hortalizas">
-          <div class="cartel-body">
-            <div class="cartel-nombre"><i class="bi bi-tag"></i> HORTALIZAS</div>
-            <span class="cartel-precio">bandeja 1,99€</span>
-          </div>
-        </div>
-        <!-- tarjeta 5 -->
-        <div class="cartel-foto-card">
-          <img class="img-cartel" src="https://images.pexels.com/photos/461060/pexels-photo-461060.jpeg?auto=compress&cs=tinysrgb&w=300&h=200&dpr=2" alt="pan">
-          <div class="cartel-body">
-            <div class="cartel-nombre"><i class="bi bi-tag"></i> PAN RECIENTE</div>
-            <span class="cartel-precio">0,95 €</span>
-          </div>
-        </div>
-        <!-- tarjeta 6 -->
-        <div class="cartel-foto-card">
-          <img class="img-cartel" src="https://images.pexels.com/photos/618776/pexels-photo-618776.jpeg?auto=compress&cs=tinysrgb&w=300&h=200&dpr=2" alt="carne">
-          <div class="cartel-body">
-            <div class="cartel-nombre"><i class="bi bi-tag"></i> CARNES</div>
-            <span class="cartel-precio">desde 4,99€</span>
-          </div>
-        </div>
-        <!-- tarjeta 7 -->
-        <div class="cartel-foto-card">
-          <img class="img-cartel" src="https://images.pexels.com/photos/462346/pexels-photo-462346.jpeg?auto=compress&cs=tinysrgb&w=300&h=200&dpr=2" alt="pescados">
-          <div class="cartel-body">
-            <div class="cartel-nombre"><i class="bi bi-tag"></i> PESCADOS</div>
-            <span class="cartel-precio">merluza 7,90€</span>
-          </div>
-        </div>
-        <!-- tarjeta 8 -->
-        <div class="cartel-foto-card">
-          <img class="img-cartel" src="https://images.pexels.com/photos/4041392/pexels-photo-4041392.jpeg?auto=compress&cs=tinysrgb&w=300&h=200&dpr=2" alt="lácteos">
-          <div class="cartel-body">
-            <div class="cartel-nombre"><i class="bi bi-tag"></i> LÁCTEOS</div>
-            <span class="cartel-precio">yogur 2x3€</span>
-          </div>
-        </div>
+      <!-- SEGUNDO GRUPO: los tres carteles adicionales que se ven: SUPER OFERTA, 2X1 CÍTRICOS, HUEVOS CAMPESTRES (con el mismo estilo) -->
+      <div class="carteles-secundarios">
+        <span class="cartel-sec">SUPER OFERTA</span>
+        <span class="cartel-sec">2X1 CÍTRICOS</span>
+        <span class="cartel-sec">HUEVOS CAMPESTRES</span>
       </div>
 
-      <!-- Bloque de Ofertas especiales con mini imágenes reales (aspecto llamativo) -->
-      <div class="ofertas-destacadas">
-        <div class="oferta-block">
-          <img src="https://images.pexels.com/photos/1002778/pexels-photo-1002778.jpeg?auto=compress&cs=tinysrgb&w=60&h=60&dpr=2" alt="naranjas">
-          <span class="oferta-texto">SUPER OFERTA</span>
-          <span class="badge-oferta">2x1 cítricos</span>
-        </div>
-        <div class="oferta-block">
-          <img src="https://images.pexels.com/photos/1435735/pexels-photo-1435735.jpeg?auto=compress&cs=tinysrgb&w=60&h=60&dpr=2" alt="huevos">
-          <span class="oferta-texto">HUEVOS CAMPESTRES</span>
-          <span class="badge-oferta">docena 2,3€</span>
-        </div>
-        <div class="oferta-block">
-          <img src="https://images.pexels.com/photos/699526/pexels-photo-699526.jpeg?auto=compress&cs=tinysrgb&w=60&h=60&dpr=2" alt="tomates">
-          <span class="oferta-texto">TOMATE CHERRY</span>
-          <span class="badge-oferta">bandeja 1,5€</span>
-        </div>
+      <!-- PIE con punto y texto actualizado (exactamente como en la imagen: un punto naranja y "más carteles en la web · actualizado 2026") -->
+      <div class="nota-pie">
+        <span class="punto-naranja"></span>
+        <span>más carteles en la web · actualizado 2026</span>
       </div>
+    </div>
+  </div>
 
-      <!-- nota de actualización con ícono y estilo fresco -->
-      <div class="small-note-premium">
-        <i class="bi bi-calendar-check"></i> cartelería web actualizada 2026 · productos frescos garantizados 
-        <i class="bi bi-emoji-smile" style="font-size: 1.8rem;"></i>
-      </div>
-    </div> <!-- fin cartelera-premium -->
-  </div> <!-- fin card-frontera -->
+  <!-- sin bootstrap js ni nada extra, solo maqueta fiel -->
 </body>
 </html>
