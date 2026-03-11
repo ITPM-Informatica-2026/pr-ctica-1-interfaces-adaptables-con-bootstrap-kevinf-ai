@@ -1,36 +1,399 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>DPW II - ITPM 2026</title>
-    <style>
-        :root { --primary: #2563eb; --dark: #1e293b; --bg: #f8fafc; }
-        body { font-family: 'Inter', system-ui, sans-serif; background: var(--bg); margin: 0; display: flex; justify-content: center; align-items: center; min-height: 100vh; }
-        .card { background: white; width: 90%; max-width: 800px; padding: 2rem; border-radius: 1rem; shadow: 0 10px 15px -3px rgba(0,0,0,0.1); border-left: 8px solid var(--primary); }
-        h1 { color: var(--dark); margin-top: 0; }
-        .badge { background: var(--primary); color: white; padding: 4px 12px; border-radius: 20px; font-size: 0.8rem; }
-        .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-top: 2rem; }
-        .box { border: 1px dashed #cbd5e1; padding: 1rem; border-radius: 0.5rem; }
-    </style>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Supermercado Frontera · Alimentos Frescos</title>
+  <!-- Bootstrap 5 (boomstrap) -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+  <!-- Bootstrap Icons para detalles -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+  <!-- Google Fonts: Montserrat + Playfair Display (toque rústico-fresco) -->
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;800&family=Playfair+Display:ital,wght@0,500;0,700;1,400&display=swap" rel="stylesheet">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    body {
+      background: linear-gradient(145deg, #f3f1eb 0%, #e8e3d8 100%);
+      font-family: 'Montserrat', sans-serif;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+      padding: 2rem 1rem;
+    }
+    /* Tarjeta principal con sombra y textura sutil */
+    .card-frontera {
+      max-width: 1100px;
+      width: 100%;
+      background-color: #ffffff;
+      border-radius: 48px 48px 40px 40px;
+      box-shadow: 0 30px 50px -15px rgba(0, 0, 0, 0.25), 0 0 0 1px rgba(255, 215, 180, 0.3) inset;
+      overflow: hidden;
+      backdrop-filter: blur(2px);
+      transition: all 0.2s ease;
+    }
+    /* HEADER con imagen de fondo y superposición */
+    .hero-fresco {
+      background-image: linear-gradient(97deg, rgba(0, 0, 0, 0.2) 0%, rgba(0, 0, 0, 0.1) 60%), url('https://images.pexels.com/photos/2641886/pexels-photo-2641886.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2');
+      background-size: cover;
+      background-position: center 30%;
+      padding: 3rem 3rem 2.5rem 3rem;
+      position: relative;
+      border-bottom: 6px solid #e67946;
+    }
+    /* capa tenue para legibilidad */
+    .hero-fresco::before {
+      content: "";
+      position: absolute;
+      top: 0; left: 0; width: 100%; height: 100%;
+      background: rgba(255, 245, 235, 0.2);
+      backdrop-filter: blur(1.5px);
+      pointer-events: none;
+    }
+    .hero-content {
+      position: relative;
+      z-index: 3;
+    }
+    .display-super {
+      font-size: 5.2rem;
+      font-weight: 800;
+      line-height: 1;
+      color: #ffffff;
+      text-shadow: 4px 4px 12px rgba(0, 0, 0, 0.5), 2px 2px 0 #d94f2b;
+      letter-spacing: -0.02em;
+      margin-bottom: 0.5rem;
+      text-transform: uppercase;
+      background: linear-gradient(135deg, #fff9f0, #ffeede);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      text-shadow: 2px 2px 8px rgba(0,0,0,0.3);
+    }
+    .super-underline {
+      width: 140px;
+      height: 8px;
+      background: #ffb08c;
+      border-radius: 40px;
+      margin: 15px 0 20px 0;
+      box-shadow: 0 2px 6px #d94f2b80;
+    }
+    .bullet-line {
+      display: flex;
+      align-items: center;
+      gap: 15px;
+      margin: 12px 0;
+      background: rgba(255, 255, 255, 0.7);
+      backdrop-filter: blur(8px);
+      padding: 0.6rem 1.5rem 0.6rem 1rem;
+      border-radius: 60px;
+      width: fit-content;
+      border: 1px solid rgba(255, 140, 80, 0.3);
+    }
+    .bullet {
+      width: 18px;
+      height: 18px;
+      background: #e65322;
+      border-radius: 50%;
+      box-shadow: 0 0 0 3px #ffe4d6;
+    }
+    .alimento-text {
+      font-size: 2.3rem;
+      font-weight: 600;
+      color: #1f2a1e;
+      line-height: 1.2;
+      text-transform: lowercase;
+      font-family: 'Playfair Display', serif;
+      letter-spacing: -0.01em;
+    }
+    .alimento-text::first-letter {
+      text-transform: uppercase;
+      font-size: 2.6rem;
+      font-weight: 700;
+      color: #b34513;
+    }
+
+    /* SECCIÓN CARTELERA CON FOTOS REALES */
+    .cartelera-premium {
+      background-color: #fcf8f2;
+      padding: 2.5rem 3rem 3rem 3rem;
+      border-top: 4px solid #f0cdb0;
+    }
+    .cartel-title {
+      font-size: 2.2rem;
+      font-weight: 700;
+      color: #3e2f21;
+      text-transform: uppercase;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      border-bottom: 3px dotted #d9b596;
+      padding-bottom: 0.75rem;
+      margin-bottom: 0.5rem;
+    }
+    .cartel-sub {
+      font-size: 1.5rem;
+      font-weight: 500;
+      color: #6e4f36;
+      margin-bottom: 2rem;
+      background: #f3e9de;
+      display: inline-block;
+      padding: 0.5rem 2rem 0.5rem 1.5rem;
+      border-radius: 40px;
+      border-left: 8px solid #d94f2b;
+      font-style: italic;
+    }
+    /* grid de tarjetas con imágenes */
+    .foto-carteles-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+      gap: 1.5rem;
+      margin: 2.5rem 0 1.8rem;
+    }
+    .cartel-foto-card {
+      background: white;
+      border-radius: 28px;
+      overflow: hidden;
+      box-shadow: 0 12px 20px -12px rgba(0,0,0,0.2);
+      border: 1px solid #ffe1cc;
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+    .cartel-foto-card:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 24px 30px -12px #b35e2e80;
+    }
+    .img-cartel {
+      width: 100%;
+      height: 150px;
+      object-fit: cover;
+      border-bottom: 3px solid #ffb185;
+    }
+    .cartel-body {
+      padding: 0.9rem 1rem 1rem 1rem;
+      background: #ffffff;
+    }
+    .cartel-nombre {
+      font-weight: 700;
+      font-size: 1.2rem;
+      color: #421f0a;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .cartel-nombre i {
+      color: #d94f2b;
+      font-size: 1.2rem;
+    }
+    .cartel-precio {
+      font-size: 1.5rem;
+      font-weight: 800;
+      color: #2b6e3c;
+      background: #e3f5e5;
+      display: inline-block;
+      padding: 0.15rem 1rem;
+      border-radius: 40px;
+      margin-top: 8px;
+      border: 1px solid #b0dbb0;
+    }
+
+    /* Franja doble de ofertas destacadas (con foto de fondo) */
+    .ofertas-destacadas {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1.5rem;
+      margin: 2rem 0 1.5rem;
+    }
+    .oferta-block {
+      flex: 1 1 200px;
+      background: linear-gradient(112deg, #fff7ec, #ffeada);
+      border-radius: 40px;
+      padding: 0.2rem 1.5rem 0.2rem 0.8rem;
+      display: flex;
+      align-items: center;
+      gap: 0.7rem;
+      border: 1px solid #ffdac5;
+      box-shadow: 0 10px 12px -10px #cf7e4a;
+    }
+    .oferta-block img {
+      width: 60px;
+      height: 60px;
+      border-radius: 60px;
+      object-fit: cover;
+      border: 3px solid white;
+      box-shadow: 0 4px 8px #c75f2a60;
+    }
+    .oferta-texto {
+      font-weight: 700;
+      font-size: 1.2rem;
+      color: #4f2f17;
+    }
+    .badge-oferta {
+      background: #d94f2b;
+      color: white;
+      border-radius: 50px;
+      padding: 0.2rem 1rem;
+      font-size: 0.9rem;
+      font-weight: 600;
+      margin-left: 8px;
+    }
+
+    /* línea final con detalle actualizado */
+    .small-note-premium {
+      margin-top: 2.2rem;
+      font-size: 1.1rem;
+      color: #5d4a38;
+      background: #fff6e6;
+      padding: 0.8rem 1.5rem;
+      border-radius: 60px;
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      border: 2px dashed #cc9f7c;
+    }
+    .small-note-premium i {
+      color: #c7622e;
+      font-size: 1.8rem;
+    }
+
+    /* responsividad */
+    @media (max-width: 700px) {
+      .display-super { font-size: 3.8rem; }
+      .hero-fresco { padding: 2rem; }
+      .cartelera-premium { padding: 2rem; }
+    }
+  </style>
 </head>
 <body>
-    <div class="card">
-        <span class="badge">Sistemas Informáticos</span>
-        <h1>🌐 Diseño y Programación Web II</h1>
-        <p><strong>Estudiante:</strong> [TU NOMBRE COMPLETO]</p>
-        <hr>
-        <div class="grid">
-            <div class="box">
-                <strong>🔧 Stack Tecnológico:</strong><br>
-                PHP / MySQL / Laravel
-            </div>
-            <div class="box">
-                <strong>📁 Proyecto Final:</strong><br>
-                [Nombre de tu Sistema]
-            </div>
+  <div class="card-frontera">
+
+    <!-- HERO: SUPERMERCADO con imagen real de fondo (frescos) -->
+    <div class="hero-fresco">
+      <div class="hero-content">
+        <div class="display-super">SUPERMERCADO</div>
+        <div class="super-underline"></div>
+
+        <!-- para alimentos con bullet y foto en miniatura incrustada (toque real) -->
+        <div class="bullet-line">
+          <span class="bullet"></span>
+          <span class="alimento-text">para alimentos</span>
+          <img src="https://images.pexels.com/photos/1279330/pexels-photo-1279330.jpeg?auto=compress&cs=tinysrgb&w=40&h=40&dpr=2" 
+               alt="alimentos" style="width: 38px; height: 38px; border-radius: 40px; object-fit: cover; border: 2px solid white; margin-left: 5px;">
         </div>
+
+        <!-- frescos con bullet + mini imagen real -->
+        <div class="bullet-line">
+          <span class="bullet"></span>
+          <span class="alimento-text">frescos</span>
+          <img src="https://images.pexels.com/photos/4057699/pexels-photo-4057699.jpeg?auto=compress&cs=tinysrgb&w=40&h=40&dpr=2" 
+               alt="frescos" style="width: 38px; height: 38px; border-radius: 40px; object-fit: cover; border: 2px solid white; margin-left: 5px;">
+        </div>
+      </div>
     </div>
+
+    <!-- CARTELERÍA DE LA PÁGINA WEB FRONTERA (con fotos reales de productos) -->
+    <div class="cartelera-premium">
+      <div class="cartel-title">
+        <i class="bi bi-megaphone-fill" style="color: #d94f2b;"></i> Carteles de la página web
+      </div>
+      <div class="cartel-sub">
+        <i class="bi bi-grid-3x3-gap-fill me-2"></i> CARTELERÍA DE LA PÁGINA WEB FRONTERA
+      </div>
+
+      <!-- Grid con fotos reales de alimentos y sus carteles -->
+      <div class="foto-carteles-grid">
+        <!-- tarjeta 1 -->
+        <div class="cartel-foto-card">
+          <img class="img-cartel" src="https://images.pexels.com/photos/2294476/pexels-photo-2294476.jpeg?auto=compress&cs=tinysrgb&w=300&h=200&dpr=2" alt="limones">
+          <div class="cartel-body">
+            <div class="cartel-nombre"><i class="bi bi-tag"></i> OFERTA LIMÓN</div>
+            <span class="cartel-precio">0,89 €</span>
+          </div>
+        </div>
+        <!-- tarjeta 2 -->
+        <div class="cartel-foto-card">
+          <img class="img-cartel" src="https://images.pexels.com/photos/2329440/pexels-photo-2329440.jpeg?auto=compress&cs=tinysrgb&w=300&h=200&dpr=2" alt="verduras">
+          <div class="cartel-body">
+            <div class="cartel-nombre"><i class="bi bi-tag"></i> VERDURAS</div>
+            <span class="cartel-precio">1,25 €/kg</span>
+          </div>
+        </div>
+        <!-- tarjeta 3 -->
+        <div class="cartel-foto-card">
+          <img class="img-cartel" src="https://images.pexels.com/photos/61127/pexels-photo-61127.jpeg?auto=compress&cs=tinysrgb&w=300&h=200&dpr=2" alt="fresas">
+          <div class="cartel-body">
+            <div class="cartel-nombre"><i class="bi bi-tag"></i> FRUTA DEL DÍA</div>
+            <span class="cartel-precio">fresas 2,50€</span>
+          </div>
+        </div>
+        <!-- tarjeta 4 -->
+        <div class="cartel-foto-card">
+          <img class="img-cartel" src="https://images.pexels.com/photos/2574616/pexels-photo-2574616.jpeg?auto=compress&cs=tinysrgb&w=300&h=200&dpr=2" alt="hortalizas">
+          <div class="cartel-body">
+            <div class="cartel-nombre"><i class="bi bi-tag"></i> HORTALIZAS</div>
+            <span class="cartel-precio">bandeja 1,99€</span>
+          </div>
+        </div>
+        <!-- tarjeta 5 -->
+        <div class="cartel-foto-card">
+          <img class="img-cartel" src="https://images.pexels.com/photos/461060/pexels-photo-461060.jpeg?auto=compress&cs=tinysrgb&w=300&h=200&dpr=2" alt="pan">
+          <div class="cartel-body">
+            <div class="cartel-nombre"><i class="bi bi-tag"></i> PAN RECIENTE</div>
+            <span class="cartel-precio">0,95 €</span>
+          </div>
+        </div>
+        <!-- tarjeta 6 -->
+        <div class="cartel-foto-card">
+          <img class="img-cartel" src="https://images.pexels.com/photos/618776/pexels-photo-618776.jpeg?auto=compress&cs=tinysrgb&w=300&h=200&dpr=2" alt="carne">
+          <div class="cartel-body">
+            <div class="cartel-nombre"><i class="bi bi-tag"></i> CARNES</div>
+            <span class="cartel-precio">desde 4,99€</span>
+          </div>
+        </div>
+        <!-- tarjeta 7 -->
+        <div class="cartel-foto-card">
+          <img class="img-cartel" src="https://images.pexels.com/photos/462346/pexels-photo-462346.jpeg?auto=compress&cs=tinysrgb&w=300&h=200&dpr=2" alt="pescados">
+          <div class="cartel-body">
+            <div class="cartel-nombre"><i class="bi bi-tag"></i> PESCADOS</div>
+            <span class="cartel-precio">merluza 7,90€</span>
+          </div>
+        </div>
+        <!-- tarjeta 8 -->
+        <div class="cartel-foto-card">
+          <img class="img-cartel" src="https://images.pexels.com/photos/4041392/pexels-photo-4041392.jpeg?auto=compress&cs=tinysrgb&w=300&h=200&dpr=2" alt="lácteos">
+          <div class="cartel-body">
+            <div class="cartel-nombre"><i class="bi bi-tag"></i> LÁCTEOS</div>
+            <span class="cartel-precio">yogur 2x3€</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Bloque de Ofertas especiales con mini imágenes reales (aspecto llamativo) -->
+      <div class="ofertas-destacadas">
+        <div class="oferta-block">
+          <img src="https://images.pexels.com/photos/1002778/pexels-photo-1002778.jpeg?auto=compress&cs=tinysrgb&w=60&h=60&dpr=2" alt="naranjas">
+          <span class="oferta-texto">SUPER OFERTA</span>
+          <span class="badge-oferta">2x1 cítricos</span>
+        </div>
+        <div class="oferta-block">
+          <img src="https://images.pexels.com/photos/1435735/pexels-photo-1435735.jpeg?auto=compress&cs=tinysrgb&w=60&h=60&dpr=2" alt="huevos">
+          <span class="oferta-texto">HUEVOS CAMPESTRES</span>
+          <span class="badge-oferta">docena 2,3€</span>
+        </div>
+        <div class="oferta-block">
+          <img src="https://images.pexels.com/photos/699526/pexels-photo-699526.jpeg?auto=compress&cs=tinysrgb&w=60&h=60&dpr=2" alt="tomates">
+          <span class="oferta-texto">TOMATE CHERRY</span>
+          <span class="badge-oferta">bandeja 1,5€</span>
+        </div>
+      </div>
+
+      <!-- nota de actualización con ícono y estilo fresco -->
+      <div class="small-note-premium">
+        <i class="bi bi-calendar-check"></i> cartelería web actualizada 2026 · productos frescos garantizados 
+        <i class="bi bi-emoji-smile" style="font-size: 1.8rem;"></i>
+      </div>
+    </div> <!-- fin cartelera-premium -->
+  </div> <!-- fin card-frontera -->
 </body>
 </html>
