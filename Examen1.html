@@ -1,0 +1,111 @@
+<!doctype html>
+<html lang="es">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>FreshCart Clone</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            min-height: 100vh;
+            background: linear-gradient(135deg, #e8f5e9 0%, #f1f8e9 40%, #e0f7fa 100%);
+        }
+        .navbar-custom {
+            background: linear-gradient(90deg, #1b5e20 0%, #2e7d32 100%);
+        }
+        .hero-section {
+            background: linear-gradient(135deg, rgba(255,255,255,0.92), rgba(200,230,201,0.7));
+            padding: 40px;
+            border-radius: 16px;
+            box-shadow: 0 12px 28px rgba(0,0,0,0.12);
+            border: 1px solid rgba(46,125,50,0.2);
+        }
+        .hero-title { color: #1b5e20; }
+        .hero-img {
+            width: 100%;
+            max-width: 320px;
+            height: 260px;
+            object-fit: cover;
+            border-radius: 18px;
+            box-shadow: 0 10px 22px rgba(0,0,0,0.18);
+        }
+        .section-title { color: #2e7d32; font-weight: 700; }
+        .category-item {
+            text-align: center;
+            padding: 14px 8px;
+            background: rgba(255,255,255,0.8);
+            border-radius: 14px;
+            border: 1px solid rgba(46,125,50,0.15);
+            margin-bottom: 12px;
+            transition: transform .2s;
+        }
+        .category-item:hover { transform: translateY(-4px); }
+        .category-img {
+            width: 80px;
+            height: 80px;
+            object-fit: cover;
+            border-radius: 50%;
+            margin-bottom: 8px;
+            border: 3px solid #a5d6a7;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.14);
+        }
+    </style>
+</head>
+<body>
+
+    <nav class="navbar navbar-dark navbar-custom">
+        <div class="container d-flex justify-content-between">
+            <a class="navbar-brand" href="#">FreshCart</a>
+            <div class="d-flex gap-3">
+                <span>Inicio</span> <span>Verduras</span> <span>Ofertas</span>
+                <button class="btn btn-outline-light btn-sm">Bit Online</button>
+                <button class="btn btn-outline-light btn-sm">Mi Cuenta</button>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container mt-4">
+        <div class="row hero-section align-items-center">
+            <div class="col-md-6">
+                <h1 class="hero-title">Supermercado para alimentos frescos</h1>
+                <p class="text-muted">Seleccionamos solo lo mejor para tu hogar.</p>
+                <button class="btn btn-success px-4">Compre ahora →</button>
+            </div>
+            <div class="col-md-6 text-center">
+                <img src="https://images.unsplash.com/photo-1542838132-92c53300491e?auto=format&fit=crop&w=800&q=80"
+                     alt="Supermercado de alimentos frescos" class="hero-img mx-auto d-block">
+            </div>
+        </div>
+
+        <h4 class="mt-5 section-title">Categorías destacadas</h4>
+        <div class="row mt-3">
+            <div class="col-md-2 col-4 category-item">
+                <img src="https://images.unsplash.com/photo-1619566636858-adf3ef46400b?auto=format&fit=crop&w=200&q=80" alt="Frutas" class="category-img mx-auto d-block">
+                <small>Frutas</small>
+            </div>
+            <div class="col-md-2 col-4 category-item">
+                <img src="https://images.unsplash.com/photo-1518843875459-f738682238a6?auto=format&fit=crop&w=200&q=80" alt="Verduras" class="category-img mx-auto d-block">
+                <small>Verduras</small>
+            </div>
+            <div class="col-md-2 col-4 category-item">
+                <img src="https://images.unsplash.com/photo-1563636619-e9143da7973b?auto=format&fit=crop&w=200&q=80" alt="Lácteos" class="category-img mx-auto d-block">
+                <small>Lácteos</small>
+            </div>
+            <div class="col-md-2 col-4 category-item">
+                <img src="https://images.unsplash.com/photo-1607623814075-e51df1bdc82f?auto=format&fit=crop&w=200&q=80" alt="Carnes" class="category-img mx-auto d-block">
+                <small>Carnes</small>
+            </div>
+            <div class="col-md-2 col-4 category-item">
+                <img src="https://images.unsplash.com/photo-1509440159596-0249088772ff?auto=format&fit=crop&w=200&q=80" alt="Panadería" class="category-img mx-auto d-block">
+                <small>Panadería</small>
+            </div>
+            <div class="col-md-2 col-4 category-item">
+                <img src="https://images.unsplash.com/photo-1622483767028-3f66f32aef97?auto=format&fit=crop&w=200&q=80" alt="Bebidas" class="category-img mx-auto d-block">
+                <small>Bebidas</small>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
